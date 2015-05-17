@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 16:29:16 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 00:56:06 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/05/17 16:27:42 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int expose_hook(t_wlf *wlf)
 {
-	ft_putchar('q');
-
-	ft_draw_map(wlf);
+/* 	int lar = 30; */
+/* 	int len = 30; */
 	mlx_clear_window(MLXP, WINP);
+	ft_draw_map(wlf);
+/* 	wlf->text = mlx_xpm_file_to_image(MLXP, "textures/wolf3d-2017-nguye_1/carabine.xpm", &lar, &len); */
 
+/*     mlx_put_image_to_window(MLXP, WINP, TEXT, 0,0); */
 	return (0);
 }
 t_wlf *left(t_wlf *w)
@@ -48,24 +50,22 @@ int key_hook(int keycode, t_wlf *wlf)
 {
 	printf("%d\n",keycode);
 
-	if (keycode == 65307)
+	if (keycode == 65307 || keycode == 53)
 		exit(0);
-	if (keycode == 65361)
+	if (keycode == 65361 || keycode == 123)
 	{
     printf("---%d \n",wlf->map[0][0]);fflush(stdout);
 		wlf = left(wlf);
 		wlf->right = 1;
 	}
-	if (keycode == 65363)
+	if (keycode == 65363 || keycode == 124)
 		wlf = right(wlf);
-		wlf->left = 1;
-	/* if (keycode == 119) */
-	/* 	wlf->factordiry+=1; */
-	/* if (keycode == 120) */
-	/* 	wlf->factordiry-=1; */
-	mlx_clear_window(MLXP, WINP);
-    ft_draw_map(wlf);
-
+	if (keycode == 126)
+		wlf = up(wlf);
+	if (keycode == 125)
+		wlf = down(wlf);
+	wlf->left = 1;
+	expose_hook(wlf);
 	return (0);
 }
 

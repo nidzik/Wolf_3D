@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:05:35 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 00:57:48 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/05/17 15:59:51 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,30 @@ t_wlf ft_stockmap(t_wlf *wlf)
 
 void ft_init_env(t_wlf *wlf)
 {
+    int lar = 10;
+    int len = 10;
 	wlf->right = 0;
 	wlf->left = 0;
 	wlf->p.dirx = -1;// - wlf->factordirx;
 	wlf->p.diry = 0;// - wlf->factordiry;
 	wlf->p.planex = 0;
 	wlf->p.planey = 0.66;
+	wlf->p.posx = 5;
+	wlf->p.posy = 3;
+	wlf->move_speed = 0.5 ;
 	wlf->time = 0;
 	wlf->oldtime = 0;
-	ft_putchar('r');
 	ft_stockmap(wlf);
+/* 	wlf->text = mlx_xpm_file_to_image(MLXP, "textures/wolf3d-2017-nguye_1/carabine.xpm", &lar, &len); */
+/* 	mlx_put_image_to_window(MLXP, WINP, TEXT, 00,00); */
 }
 
 t_pos	ft_init_value(t_pos pos, t_wlf *w)
 {
-	time_t t1;
+/* 	time_t t1; */
 
-	pos.posx = 5;
-	pos.posy = 3;
+	pos.posx = w->p.posx;
+	pos.posy = w->p.posy;
 
 	/* if (w->right == 1) */
 	/* 	pos = ft_right(pos, w); */
@@ -93,10 +99,10 @@ t_pos	ft_init_value(t_pos pos, t_wlf *w)
 
 		printf("dirx : %f,  diry %f   planex : %f  planey  : %f\n",pos.dirx, pos.diry, pos.planex, pos.planey);
 
-	w->oldtime = w->time;
-	w->time = (double)localtime(&t1)->tm_sec;
-	w->frametime = (w->time - w->oldtime ) / 1000.0;
-	printf("fps : %f\n",  w->frametime);
+/* 	w->oldtime = w->time; */
+/* 	w->time = (double)localtime(&t1)->tm_sec; */
+/* 	w->frametime = (w->time - w->oldtime ) / 1000.0; */
+/* 	printf("fps : %f\n",  w->frametime); */
 	pos.i = 0;
 	pos.hwall = 1;
 	pos.color = 0;

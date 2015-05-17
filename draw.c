@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 18:15:36 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 00:50:31 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/05/17 16:57:11 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void   ft_draw_map(t_wlf *wlf)
 {
 	t_pos pos;
 	t_ray r;
+	int lar = 100;
+	int len = 100;
 
 	pos = ft_init_value(pos, wlf);
 	while(pos.i < WIN_X)
@@ -40,11 +42,17 @@ void   ft_draw_map(t_wlf *wlf)
 			pos.color = 0x5599ff;
 		if (r.side == 1)
 			pos.color = pos.color / 2;
-
+		ft_draw_sky(wlf, pos);
 		while (pos.dstart <= pos.dend)
 			mlx_pixel_put(MLXP, WINP, pos.i, pos.dstart++, pos.color);
+		ft_draw_floor(wlf, pos);
 		pos.i++;	
 	}
+/* 	wlf->text = mlx_new_image(MLXP, 50,  50); */
+
+/* 	wlf->text = mlx_xpm_file_to_image(MLXP, "textures/wolf3d-2017-nguye_1/carabine.xpm", &lar, &len); */
+/* 	sleep(1); */
+	mlx_put_image_to_window(MLXP, WINP, TEXT, -180,-180);
     wlf->frametime = (wlf->time - wlf->oldtime ) / 1000.0;
     /* if (wlf->right == 1) */
     /*     pos = ft_right(pos, wlf); */
@@ -108,4 +116,30 @@ t_ray	ft_find_wall(t_ray r, t_wlf *wlf)
 						   (1 - r.stepy) / 2) / r.raydiry);
 	/* printf("%d   %d \n",(int)r.walldist, r.side); */
 	return(r);
+}
+
+void ft_draw_sky(t_wlf *wlf, t_pos p)
+{
+	int i;
+	int color_sky;
+
+	color_sky = 0x5555ee,
+	i = 0;
+	while (i < p.dstart)
+	{
+		mlx_pixel_put(MLXP, WINP, p.i, i++, color_sky);
+	}
+}
+
+void ft_draw_floor(t_wlf *wlf, t_pos p)
+{
+	int i;
+	int color_floor;
+
+	color_floor = 0x20ee20,
+	i = p.dend;
+	while (i < WIN_Y)
+	{
+		mlx_pixel_put(MLXP, WINP, p.i, i++, color_floor);
+	}
 }
