@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 16:29:16 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/07 18:17:59 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/07 21:52:58 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int expose_hook(t_wlf *wlf)
 {
-	mlx_clear_window(MLXP, WINP);
+	/* mlx_clear_window(MLXP, WINP); */
 	ft_draw_map(wlf);
 	return (0);
 }
@@ -55,13 +55,17 @@ int key_hook(int keycode, t_wlf *wlf)
 		wlf = up(wlf);
 	if (keycode == 125 || keycode == 65364)
 		wlf = down(wlf);
-	if (keycode == 116)
-		wlf->hwallvar += 0.1;
+	if (keycode == 116 || keycode == 65365)
+		wlf->hwallvar += 0.05;
+	if (keycode == 65366)
+		wlf->hwallvar -= 0.05;
 	if (keycode == 121 && wlf->hwallvar > -0.5)
-		wlf->hwallvar -= 0.1;
-	if (keycode == 82)
+		wlf->hwallvar -= 0.05;
+	if (keycode == 82 || keycode == 65438)
 		wlf->hwallvar = 0;
 	wlf = tp(wlf);
+	/* printf("sayhey");fflush(stdout); */
+	/* usleep(1000); */
 	expose_hook(wlf);
 	return (0);
 }

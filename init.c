@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:05:35 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/07 17:11:19 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/07 21:33:17 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void ft_init_env(t_wlf *wlf)
 	wlf->p.planey = 0.66;
 	wlf->p.posx = 5;
 	wlf->p.posy = 3;
-	wlf->speedrotate = 0.4;
-	wlf->move_speed = 0.4;
+	wlf->speedrotate = 0.09;
+	wlf->move_speed = 0.1;
 	wlf->time = 0;
 	wlf->oldtime = 0;
 	ft_stockmap(wlf);

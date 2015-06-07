@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:31:41 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/07 18:19:51 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/07 20:19:44 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "./libft/libft.h"
-# include "./dirmlx/lib/mlx.h"
+/* # include "./dirmlx/lib/mlx.h" */
+# include <mlx.h>
 # include <time.h>
 # include <sys/time.h>
 
@@ -29,8 +30,8 @@
 # define IMG wlf.img
 # define IMGP wlf->img
 
-# define WIN_X 600
-# define WIN_Y 400
+# define WIN_X 1000
+# define WIN_Y 600
 
 # define R r->
 # define W wlf->

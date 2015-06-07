@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 18:15:36 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/07 17:55:42 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/07 20:08:57 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void   ft_draw_map(t_wlf *wlf)
 	/* int lar = 100; */
 	/* int len = 100; */
 	pos = ft_init_value(pos, wlf);
-	printf("\n\n\n\n\n\n\n0");
+	/* printf("\n\n\n\n\n\n\n0"); */
 	while(pos.i < WIN_X)
 	{
 		r = ft_init_ray(r, pos);
@@ -42,7 +42,7 @@ void   ft_draw_map(t_wlf *wlf)
 			
 			
 		}
-		printf("%f %f      - > %f %f\n",pos.planex, pos.planey, pos.posx, pos.posy);
+		/* printf("%f %f      - > %f %f\n",pos.planex, pos.planey, pos.posx, pos.posy); */
 		if (r.side == 1 && r.raydiry < 0 && r.stepy < 0)
 			pos.color = (pos.posy > 6) ? 0x508816 : 0x99ff33;
 /* 			pos.color = 0x508816;//0x99ff33; */
@@ -56,6 +56,7 @@ void   ft_draw_map(t_wlf *wlf)
 		ft_draw_floor(wlf, pos);
 		pos.i++;	
 	}
+
 /* 	mlx_put_image_to_window(MLXP, WINP, TEXT, -180,-180); */
 	return ;
 }
@@ -111,7 +112,7 @@ t_ray	ft_find_wall(t_ray r, t_wlf *wlf)
 	else
 		r.walldist = fabs((r.mapy - r.rayposy + 
 						   (1 - r.stepy) / 2) / r.raydiry);
-	printf("- %d need 0  - %f - %f  %d  %d \n",r.side, r.raydiry, r.raydirx, r.stepx, r.stepy);
+	/* printf("- %d need 0  - %f - %f  %d  %d \n",r.side, r.raydiry, r.raydirx, r.stepx, r.stepy); */
 	return(r);
 }
 
@@ -123,6 +124,7 @@ t_wlf *ft_draw_sky(t_wlf *wlf, t_pos p)
 
 	color_sky = 0x3366cc;
 	color_sky2 = 0x3b2b00;
+	(void)color_sky2; 
 	i = 0;
 	color_sky = (p.posy > 6) ? 0x3b2b00 : 0x3366cc;
 	while (i < p.dstart)
@@ -140,6 +142,7 @@ void ft_draw_floor(t_wlf *wlf, t_pos p)
 
 	color_floor = 0x336600;
 	color_floor2 = 0x3f4f00;
+	(void)color_floor2;
 	i = p.dend;
 	color_floor = (p.posy > 6) ? 0x3f4f00 : 0x336600;
 	while (i < WIN_Y)
