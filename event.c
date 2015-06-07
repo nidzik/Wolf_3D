@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 16:29:16 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/05 00:33:28 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/07 18:17:59 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 
 int expose_hook(t_wlf *wlf)
 {
-/* 	int lar = 30; */
-/* 	int len = 30; */
-	/* mlx_clear_window(MLXP, WINP); */
+	mlx_clear_window(MLXP, WINP);
 	ft_draw_map(wlf);
-
-/* 	wlf->text = mlx_xpm_file_to_image(MLXP, "textures/wolf3d-2017-nguye_1/carabine.xpm", &lar, &len); */
-
-/*     mlx_put_image_to_window(MLXP, WINP, TEXT, 0,0); */
 	return (0);
 }
+
 t_wlf *left(t_wlf *w)
 {
 	w->p.olddirx = w->p.dirx;
@@ -34,6 +29,7 @@ t_wlf *left(t_wlf *w)
 	w->p.planey = w->p.oldplanex  * sin(w->speedrotate) + w->p.planey  * cos(w->speedrotate) ;
 	return (w);
 }
+
 t_wlf *right(t_wlf *w)
 {
 	w->p.olddirx = w->p.dirx;
@@ -49,29 +45,24 @@ t_wlf *right(t_wlf *w)
 int key_hook(int keycode, t_wlf *wlf)
 {
 	printf("%d\n",keycode);
-
 	if (keycode == 65307 || keycode == 53)
 		exit(0);
 	if (keycode == 65361 || keycode == 123)
-	{
-    printf("---%d \n",wlf->map[0][0]);fflush(stdout);
-    /* mlx_do_key_autorepeaton(MLXP); */
-
 		wlf = left(wlf);
-		wlf->right = 1;
-
-	}
 	if (keycode == 65363 || keycode == 124)
 		wlf = right(wlf);
 	if (keycode == 126 || keycode == 65362)
 		wlf = up(wlf);
 	if (keycode == 125 || keycode == 65364)
 		wlf = down(wlf);
-	wlf->left = 1;
-
-		/* sleep(1); */
+	if (keycode == 116)
+		wlf->hwallvar += 0.1;
+	if (keycode == 121 && wlf->hwallvar > -0.5)
+		wlf->hwallvar -= 0.1;
+	if (keycode == 82)
+		wlf->hwallvar = 0;
+	wlf = tp(wlf);
 	expose_hook(wlf);
-
 	return (0);
 }
 
@@ -90,7 +81,6 @@ t_pos ft_right(t_pos pos, t_wlf *w)
 	w->p.planey = pos.planey;
 	w->p.oldplanex = pos.oldplanex;
 	w->right = 0;
-	printf("1	w->p.dirx %f\n",	w->p.dirx);
 	return (pos);
 }
 

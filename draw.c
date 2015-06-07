@@ -6,37 +6,19 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 18:15:36 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/06 13:46:17 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/07 17:55:42 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-t_wlf *mlx_put_pixel_to_image(t_wlf *wlf, int x, int y, int color)
-{
-	int px;
-
-	px = y * wlf->sizeline + x * (wlf->bpp / 8);
-	/* wlf->data[0] = 'f'; */
-	printf("izi %d  \n",px );fflush(stdout);
-	wlf->data1[px+1] = color;
-	wlf->data1[px + 2] = color >> 8;
-	wlf->data1[px + 3] = color >> 16;
-	return (wlf);
-}
 void   ft_draw_map(t_wlf *wlf)
 {
 	t_pos pos;
 	t_ray r;
-	static int i = 0;
 	/* int lar = 100; */
 	/* int len = 100; */
-	if (i == 0)
-	{
-	wlf->data = mlx_get_data_addr(IMGP, &wlf->bpp, &wlf->sizeline, &wlf->endian);
-    wlf->data1 = (char *)malloc(sizeof(char) * (wlf->bpp * wlf->sizeline + 4 ));
-	i = 1;
-	}
 	pos = ft_init_value(pos, wlf);
+	printf("\n\n\n\n\n\n\n0");
 	while(pos.i < WIN_X)
 	{
 		r = ft_init_ray(r, pos);
@@ -49,35 +31,32 @@ void   ft_draw_map(t_wlf *wlf)
 			pos.dstart = 0;
 		if (pos.dend >= pos.hwall * WIN_Y)
 			pos.dend = pos.hwall * WIN_Y - 1; 
-		/* if (pos.i % 30 == 0) */
-			/* sleep(1); */
-		/* printf("pos.dstart     %d pos.dend %d      %d %d \n",pos.dstart, pos.dend, pos.i,(int)r.walldist);fflush(stdout); */
-		
 		if (wlf->map[r.mapx][r.mapy] == 1)
-			pos.color = 0xff9955;
-		else
-			pos.color = 0x5599ff;
-		if (r.side == 1)
-			pos.color = pos.color / 2;
+		{
+			if (r.raydirx < 0 && r.stepx < 0 && r.side == 0)
+				pos.color = (pos.posy > 6) ? 0x885038 : 0xff9977;
+/* 				pos.color = 0x885038;//0xff9977; */
+			else
+				pos.color = (pos.posy > 6) ? 0x668850 : 0xccff99;
+/* 				pos.color = 0x668850;//0xccff99;; */
+			
+			
+		}
+		printf("%f %f      - > %f %f\n",pos.planex, pos.planey, pos.posx, pos.posy);
+		if (r.side == 1 && r.raydiry < 0 && r.stepy < 0)
+			pos.color = (pos.posy > 6) ? 0x508816 : 0x99ff33;
+/* 			pos.color = 0x508816;//0x99ff33; */
+		else if (r.side == 1)
+			pos.color = (pos.posy > 6) ? 0x446644 : 0x88cc88;
+/* 			pos.color = 0x446644;//0x88cc88; */
 		ft_draw_sky(wlf, pos);
+/* 		pos.color/=2; */
 		while (pos.dstart <= pos.dend)
-			mlx_put_pixel_to_image(MLXP, pos.i, pos.dstart++, pos.color);
-/* mlx_pixel_put(MLXP, WINP, pos.i, pos.dstart++, pos.color); */
+			mlx_pixel_put(MLXP, WINP, pos.i, pos.dstart++, pos.color);
 		ft_draw_floor(wlf, pos);
 		pos.i++;	
 	}
-/* 	wlf->text = mlx_new_image(MLXP, 50,  50); */
-
-/* 	wlf->text = mlx_xpm_file_to_image(MLXP, "textures/wolf3d-2017-nguye_1/carabine.xpm", &lar, &len); */
-	/* sleep(1); */
-	/* mlx_put_image_to_window(MLXP, WINP, TEXT, -180,-180); */
-    wlf->frametime = (wlf->time - wlf->oldtime ) / 1000.0;
-    /* if (wlf->right == 1) */
-    /*     pos = ft_right(pos, wlf); */
-    /* else if (wlf->left == 1) */
-    /*     pos = ft_left(pos, wlf); */
-
-    printf("fps : %f\n",  1.0 / wlf->frametime);
+/* 	mlx_put_image_to_window(MLXP, WINP, TEXT, -180,-180); */
 	return ;
 }
 
@@ -132,7 +111,7 @@ t_ray	ft_find_wall(t_ray r, t_wlf *wlf)
 	else
 		r.walldist = fabs((r.mapy - r.rayposy + 
 						   (1 - r.stepy) / 2) / r.raydiry);
-	/* printf("%d   %d \n",(int)r.walldist, r.side); */
+	printf("- %d need 0  - %f - %f  %d  %d \n",r.side, r.raydiry, r.raydirx, r.stepx, r.stepy);
 	return(r);
 }
 
@@ -140,13 +119,15 @@ t_wlf *ft_draw_sky(t_wlf *wlf, t_pos p)
 {
 	int i;
 	int color_sky;
+	int color_sky2;
 
-	color_sky = 0x5555ee;
+	color_sky = 0x3366cc;
+	color_sky2 = 0x3b2b00;
 	i = 0;
+	color_sky = (p.posy > 6) ? 0x3b2b00 : 0x3366cc;
 	while (i < p.dstart)
 	{
-		wlf = mlx_put_pixel_to_image(MLXP, p.i, i++, color_sky);
-		/* mlx_pixel_put(MLXP, WINP, p.i, i++, color_sky); */
+		mlx_pixel_put(MLXP, WINP, p.i, i++, color_sky);
 	}
 	return (wlf);
 }
@@ -155,12 +136,14 @@ void ft_draw_floor(t_wlf *wlf, t_pos p)
 {
 	int i;
 	int color_floor;
+	int color_floor2;
 
-	color_floor = 0x20ee20,
+	color_floor = 0x336600;
+	color_floor2 = 0x3f4f00;
 	i = p.dend;
+	color_floor = (p.posy > 6) ? 0x3f4f00 : 0x336600;
 	while (i < WIN_Y)
 	{
-		mlx_put_pixel_to_image(MLXP, p.i, i++, color_floor);
-		/* mlx_pixel_put(MLXP, WINP, p.i, i++, color_floor); */
+		mlx_pixel_put(MLXP, WINP, p.i, i++, color_floor);
 	}
 }

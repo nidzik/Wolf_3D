@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:31:41 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/06 13:31:12 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/07 18:19:51 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "./libft/libft.h"
-# include <mlx.h>
+# include "./dirmlx/lib/mlx.h"
 # include <time.h>
 # include <sys/time.h>
 
@@ -51,7 +51,7 @@ typedef struct	s_pos
     int			dstart;
     int			dend;
 	int			lineh;
-	int			hwall;
+	double			hwall;
 	int			color;
 }				t_pos;
 
@@ -74,6 +74,7 @@ typedef struct	s_wlf
 	double		oldtime;
 	double		frametime;
 	t_pos		p;
+	double		hwallvar;
 	double		speedrotate;
 	double		move_speed;
 }				t_wlf;
@@ -123,8 +124,8 @@ t_ray   ft_find_wall(t_ray r, t_wlf *wlf);
 t_pos	ft_left(t_pos pos, t_wlf *w);
 t_wlf	*up(t_wlf *w);
 t_wlf	*down(t_wlf *w);
-t_wlf *ft_draw_sky(t_wlf *wlf, t_pos p);
-void ft_draw_floor(t_wlf *wlf, t_pos p);
+t_wlf	*ft_draw_sky(t_wlf *wlf, t_pos p);
+void	ft_draw_floor(t_wlf *wlf, t_pos p);
 int     ft_key_hook(int keycode);
-
+t_wlf	*tp(t_wlf *w);
 #endif

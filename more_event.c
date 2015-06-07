@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/17 10:02:07 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 10:45:54 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/07 18:18:45 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,15 @@ t_wlf *down(t_wlf *w)
 		w->p.posx -= w->p.dirx * w->move_speed;
 	if(w->map[(int)w->p.posx][(int)(w->p.posy - w->p.diry * w->move_speed)] == 0)
 		w->p.posy -= w->p.diry * w->move_speed;
+	return (w);
+}
+
+t_wlf *tp(t_wlf *w)
+{
+	if (w->p.posx > 8 && w->p.posy < 2)
+	{
+		w->p.posx = 1;
+		w->p.posy = 14;
+	}
 	return (w);
 }
