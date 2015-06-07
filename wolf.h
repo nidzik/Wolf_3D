@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:31:41 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:55:45 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/06 13:31:12 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 # define MLX wlf.mlx
 # define MLXP wlf->mlx
 # define TEXT wlf->text
+# define IMG wlf.img
+# define IMGP wlf->img
 
-# define WIN_X 400
-# define WIN_Y 300
+# define WIN_X 600
+# define WIN_Y 400
 
 # define R r->
 # define W wlf->
@@ -57,6 +59,12 @@ typedef struct	s_wlf
 {
 	void		*mlx;
 	void		*win;
+	void		*img;
+	int			bpp;
+	int			sizeline;
+	int			endian;
+	char		*data;
+	char		*data1;
 	void		*text;
 	int			map_dim[2];
 	int			**map;
@@ -66,6 +74,7 @@ typedef struct	s_wlf
 	double		oldtime;
 	double		frametime;
 	t_pos		p;
+	double		speedrotate;
 	double		move_speed;
 }				t_wlf;
 
@@ -114,7 +123,8 @@ t_ray   ft_find_wall(t_ray r, t_wlf *wlf);
 t_pos	ft_left(t_pos pos, t_wlf *w);
 t_wlf	*up(t_wlf *w);
 t_wlf	*down(t_wlf *w);
-void ft_draw_sky(t_wlf *wlf, t_pos p);
+t_wlf *ft_draw_sky(t_wlf *wlf, t_pos p);
 void ft_draw_floor(t_wlf *wlf, t_pos p);
+int     ft_key_hook(int keycode);
 
 #endif

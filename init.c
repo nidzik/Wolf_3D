@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:05:35 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 15:59:51 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/05 00:32:53 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_wlf ft_stockmap(t_wlf *wlf)
 
 void ft_init_env(t_wlf *wlf)
 {
-    int lar = 10;
-    int len = 10;
+    /* int lar = 10; */
+    /* int len = 10; */
 	wlf->right = 0;
 	wlf->left = 0;
 	wlf->p.dirx = -1;// - wlf->factordirx;
@@ -70,7 +70,8 @@ void ft_init_env(t_wlf *wlf)
 	wlf->p.planey = 0.66;
 	wlf->p.posx = 5;
 	wlf->p.posy = 3;
-	wlf->move_speed = 0.5 ;
+	wlf->speedrotate = 0.15;
+	wlf->move_speed = 0.1;
 	wlf->time = 0;
 	wlf->oldtime = 0;
 	ft_stockmap(wlf);

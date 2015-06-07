@@ -6,19 +6,36 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 18:15:36 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:57:11 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/06/06 13:46:17 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+t_wlf *mlx_put_pixel_to_image(t_wlf *wlf, int x, int y, int color)
+{
+	int px;
 
+	px = y * wlf->sizeline + x * (wlf->bpp / 8);
+	/* wlf->data[0] = 'f'; */
+	printf("izi %d  \n",px );fflush(stdout);
+	wlf->data1[px+1] = color;
+	wlf->data1[px + 2] = color >> 8;
+	wlf->data1[px + 3] = color >> 16;
+	return (wlf);
+}
 void   ft_draw_map(t_wlf *wlf)
 {
 	t_pos pos;
 	t_ray r;
-	int lar = 100;
-	int len = 100;
-
+	static int i = 0;
+	/* int lar = 100; */
+	/* int len = 100; */
+	if (i == 0)
+	{
+	wlf->data = mlx_get_data_addr(IMGP, &wlf->bpp, &wlf->sizeline, &wlf->endian);
+    wlf->data1 = (char *)malloc(sizeof(char) * (wlf->bpp * wlf->sizeline + 4 ));
+	i = 1;
+	}
 	pos = ft_init_value(pos, wlf);
 	while(pos.i < WIN_X)
 	{
@@ -44,15 +61,16 @@ void   ft_draw_map(t_wlf *wlf)
 			pos.color = pos.color / 2;
 		ft_draw_sky(wlf, pos);
 		while (pos.dstart <= pos.dend)
-			mlx_pixel_put(MLXP, WINP, pos.i, pos.dstart++, pos.color);
+			mlx_put_pixel_to_image(MLXP, pos.i, pos.dstart++, pos.color);
+/* mlx_pixel_put(MLXP, WINP, pos.i, pos.dstart++, pos.color); */
 		ft_draw_floor(wlf, pos);
 		pos.i++;	
 	}
 /* 	wlf->text = mlx_new_image(MLXP, 50,  50); */
 
 /* 	wlf->text = mlx_xpm_file_to_image(MLXP, "textures/wolf3d-2017-nguye_1/carabine.xpm", &lar, &len); */
-/* 	sleep(1); */
-	mlx_put_image_to_window(MLXP, WINP, TEXT, -180,-180);
+	/* sleep(1); */
+	/* mlx_put_image_to_window(MLXP, WINP, TEXT, -180,-180); */
     wlf->frametime = (wlf->time - wlf->oldtime ) / 1000.0;
     /* if (wlf->right == 1) */
     /*     pos = ft_right(pos, wlf); */
@@ -118,17 +136,19 @@ t_ray	ft_find_wall(t_ray r, t_wlf *wlf)
 	return(r);
 }
 
-void ft_draw_sky(t_wlf *wlf, t_pos p)
+t_wlf *ft_draw_sky(t_wlf *wlf, t_pos p)
 {
 	int i;
 	int color_sky;
 
-	color_sky = 0x5555ee,
+	color_sky = 0x5555ee;
 	i = 0;
 	while (i < p.dstart)
 	{
-		mlx_pixel_put(MLXP, WINP, p.i, i++, color_sky);
+		wlf = mlx_put_pixel_to_image(MLXP, p.i, i++, color_sky);
+		/* mlx_pixel_put(MLXP, WINP, p.i, i++, color_sky); */
 	}
+	return (wlf);
 }
 
 void ft_draw_floor(t_wlf *wlf, t_pos p)
@@ -140,6 +160,7 @@ void ft_draw_floor(t_wlf *wlf, t_pos p)
 	i = p.dend;
 	while (i < WIN_Y)
 	{
-		mlx_pixel_put(MLXP, WINP, p.i, i++, color_floor);
+		mlx_put_pixel_to_image(MLXP, p.i, i++, color_floor);
+		/* mlx_pixel_put(MLXP, WINP, p.i, i++, color_floor); */
 	}
 }
