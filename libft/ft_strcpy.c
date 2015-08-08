@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/14 14:50:44 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:53:12 by nidzik           ###   ########.fr       */
+/*   Created: 2014/11/04 12:15:58 by nidzik            #+#    #+#             */
+/*   Updated: 2014/11/11 11:07:01 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char		*ft_strcpy(char *dst, const char *src)
 {
-	t_wlf	wlf;
+	int		i;
 
-	(void)ac;
-	(void)av;
-	ft_init_env(&wlf);
-	wlf = ft_init_window(wlf);
-	return (0);
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

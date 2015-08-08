@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/14 14:50:44 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:53:12 by nidzik           ###   ########.fr       */
+/*   Created: 2014/11/05 13:02:16 by nidzik            #+#    #+#             */
+/*   Updated: 2015/03/10 12:17:45 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+int			ft_strcmp(const char *s1, const char *s2)
 {
-	t_wlf	wlf;
+	int		i;
 
-	(void)ac;
-	(void)av;
-	ft_init_env(&wlf);
-	wlf = ft_init_window(wlf);
-	return (0);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	if (s1[i] == '\200' && s2[i] == '\0')
+		return (s2[i] - s1[i]);
+	return (s1[i] - s2[i]);
 }

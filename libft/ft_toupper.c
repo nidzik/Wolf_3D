@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/14 14:50:44 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:53:12 by nidzik           ###   ########.fr       */
+/*   Created: 2014/11/05 11:45:54 by nidzik            #+#    #+#             */
+/*   Updated: 2015/03/10 18:20:49 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+int ft_toupper(int c)
 {
-	t_wlf	wlf;
-
-	(void)ac;
-	(void)av;
-	ft_init_env(&wlf);
-	wlf = ft_init_window(wlf);
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	else
+		return (c);
 }

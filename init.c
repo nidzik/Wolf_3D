@@ -6,55 +6,63 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:05:35 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/07 21:33:17 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/08 15:32:06 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-t_wlf ft_stockmap(t_wlf *wlf)
+t_wlf		ft_stockmap(t_wlf *wlf)
 {
+	char	*mapc;
+	int		*mapi;
 
-	int i = 0;
-	int j = 0;
-	int k = 0;
-	int len_map[] = {16, 10};
-	int map[] = { 
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1,
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-		 };
-
-
-	wlf->map = (int **)malloc(sizeof(int *)* 11);
-	while (i < 10)
-	{
-		if (j == 0)
-			wlf->map[i] = (int *)malloc(sizeof (int) *16);
-		wlf->map[i][j] = map[k];
-		k++;
-		j++;
-		if (j == 16)
-		{
-			j = 0;
-			i++;
-		}
-	}
-	wlf->map_dim[0] = len_map[0];
-	wlf->map_dim[1] = len_map[1];
-	if (wlf->map == NULL)
-		exit(1);
+	mapc = "1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\
+1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,\
+1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,\
+1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,\
+1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,\
+1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,\
+1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1,\
+1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,\
+1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1,\
+1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1";
+	ft_strlen(mapc);
+	mapi = ft_char_to_int(mapc);
+	wlf = creat_map(wlf, mapi);
 	return (*wlf);
 }
 
-void ft_init_env(t_wlf *wlf)
+t_wlf		*creat_map(t_wlf *wlf, int *mapi)
+{
+	t_var var;
+
+	wlf->map = (int **)malloc(sizeof(int *) * 11);
+	var.i = 0;
+	var.j = 0;
+	var.k = 0;
+	while (var.i < 10)
+	{
+		if (var.j == 0)
+		{
+			wlf->map[var.i] = (int *)malloc(sizeof(int) * 16);
+			ft_bzero(wlf->map[var.i], 16);
+		}
+		wlf->map[var.i][var.j] = mapi[var.k];
+		var.k++;
+		var.j++;
+		if (var.j == 16)
+		{
+			var.j = 0;
+			var.i++;
+		}
+	}
+	if (wlf->map == NULL)
+		exit(1);
+	return (wlf);
+}
+
+void		ft_init_env(t_wlf *wlf)
 {
 	wlf->hwallvar = 0;
 	wlf->right = 0;
@@ -65,33 +73,33 @@ void ft_init_env(t_wlf *wlf)
 	wlf->p.planey = 0.66;
 	wlf->p.posx = 5;
 	wlf->p.posy = 3;
-	wlf->speedrotate = 0.09;
-	wlf->move_speed = 0.1;
+	wlf->speedrotate = 0.15;
+	wlf->move_speed = 0.20;
 	wlf->time = 0;
 	wlf->oldtime = 0;
 	ft_stockmap(wlf);
 }
 
-t_pos	ft_init_value(t_pos pos, t_wlf *w)
+t_pos		ft_init_value(t_pos pos, t_wlf *w)
 {
 	pos.posx = w->p.posx;
 	pos.posy = w->p.posy;
-	pos.dirx = w->p.dirx; 
-    pos.diry = w->p.diry;
-    pos.olddirx = w->p.olddirx;
-    pos.planex = w->p.planex;
-    pos.planey = w->p.planey;
-    pos.oldplanex = w->p.oldplanex;
+	pos.dirx = w->p.dirx;
+	pos.diry = w->p.diry;
+	pos.olddirx = w->p.olddirx;
+	pos.planex = w->p.planex;
+	pos.planey = w->p.planey;
+	pos.oldplanex = w->p.oldplanex;
 	pos.i = 0;
 	pos.hwall = 1 + w->hwallvar;
 	pos.color = 0;
 	return (pos);
 }
 
-t_ray	ft_init_ray(t_ray r, t_pos p)
+t_ray		ft_init_ray(t_ray r, t_pos p)
 {
 	r.hit = 0;
-	r.camerax = 2 * p.i / (double)(WIN_X) -1;
+	r.camerax = 2 * p.i / (double)(WIN_X) - 1;
 	r.rayposx = p.posx;
 	r.rayposy = p.posy;
 	r.raydirx = p.dirx + p.planex * r.camerax;

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/14 14:50:44 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:53:12 by nidzik           ###   ########.fr       */
+/*   Created: 2014/11/12 12:35:19 by nidzik            #+#    #+#             */
+/*   Updated: 2014/11/12 12:38:56 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void		ft_strclr(char *s)
 {
-	t_wlf	wlf;
+	int		i;
 
-	(void)ac;
-	(void)av;
-	ft_init_env(&wlf);
-	wlf = ft_init_window(wlf);
-	return (0);
+	i = 0;
+	while (s[i])
+	{
+		s[i] = '\0';
+		i++;
+	}
 }

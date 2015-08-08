@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/14 14:50:44 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:53:12 by nidzik           ###   ########.fr       */
+/*   Created: 2014/11/16 19:56:33 by nidzik            #+#    #+#             */
+/*   Updated: 2014/12/15 12:00:48 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char		*ft_strnew(size_t size)
 {
-	t_wlf	wlf;
+	char	*str;
 
-	(void)ac;
-	(void)av;
-	ft_init_env(&wlf);
-	wlf = ft_init_window(wlf);
-	return (0);
+	str = (char *)malloc(sizeof(char) * (size + 1));
+	if (str)
+	{
+		ft_bzero(str, size + 1);
+		return (str);
+	}
+	return (NULL);
 }

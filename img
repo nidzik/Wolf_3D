@@ -1,0 +1,52 @@
+#draw.c#://	ft_bzero(wlf->data, )
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 0] = color_sky;
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 1] = color_sky >> 8;
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 2] = color_sky >> 16;
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 0] = pos.color;
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 1] = pos.color >> 8;
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 2] = pos.color >> 16;
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 0] = color_floor;
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 1] = color_floor >> 8;
+#draw.c#:				wlf->data[y * wlf->sizeline + 4 * pos.i + 2] = color_floor >> 16;
+#draw.c#:			if (wlf->map[r.mapx][r.mapy] > 0)
+draw.c://	ft_bzero(wlf->data, )
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 0] = color_sky;
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 1] = color_sky >> 8;
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 2] = color_sky >> 16;
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 0] = pos.color;
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 1] = pos.color >> 8;
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 2] = pos.color >> 16;
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 0] = color_floor;
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 1] = color_floor >> 8;
+draw.c:				wlf->data[y * wlf->sizeline + 4 * pos.i + 2] = color_floor >> 16;
+draw.c:			if (wlf->map[r.mapx][r.mapy] > 0)
+draw.c~://	ft_bzero(wlf->data, )
+draw.c~:		if (wlf->map[r.mapx][r.mapy] > 0)
+event.c:		wlf->hwallvar += 0.1;
+event.c:	if (keycode == 121 && wlf->hwallvar > -0.5)
+event.c:		wlf->hwallvar -= 0.1;
+event.c:		wlf->hwallvar = 0;
+init.c:	wlf->map = (int **)malloc(sizeof(int *) * 11);
+init.c:			wlf->map[var.i] = (int *)malloc(sizeof(int) * 16);
+init.c:			ft_bzero(wlf->map[var.i], 16);
+init.c:		wlf->map[var.i][var.j] = mapi[var.k];
+init.c:	if (wlf->map == NULL)
+init.c:	wlf->hwallvar = 0;
+init.c:	wlf->right = 0;
+init.c:	wlf->left = 0;
+init.c:	wlf->p.dirx = -1;
+init.c:	wlf->p.diry = 0;
+init.c:	wlf->p.planex = 0;
+init.c:	wlf->p.planey = 0.66;
+init.c:	wlf->p.posx = 5;
+init.c:	wlf->p.posy = 3;
+init.c:	wlf->speedrotate = 0.25;
+init.c:	wlf->move_speed = 0.35;
+init.c:	wlf->time = 0;
+init.c:	wlf->oldtime = 0;
+more_event.c:	if (wlf->map[r.mapx][r.mapy] == 1)
+more_event.c~:	if (wlf->map[r.mapx][r.mapy] == 1)
+wolf.h:# define WINP	wlf->win
+wolf.h:# define MLXP	wlf->mlx
+wolf.h:# define TEXT	wlf->text
+wolf.h:# define IMGP	 wlf->img

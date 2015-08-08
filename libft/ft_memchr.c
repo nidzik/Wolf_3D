@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/14 14:50:44 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:53:12 by nidzik           ###   ########.fr       */
+/*   Created: 2014/11/10 12:32:19 by nidzik            #+#    #+#             */
+/*   Updated: 2015/03/10 12:18:56 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void					*ft_memchr(const void *s, int c, size_t n)
 {
-	t_wlf	wlf;
+	unsigned const char	*str;
+	size_t				i;
 
-	(void)ac;
-	(void)av;
-	ft_init_env(&wlf);
-	wlf = ft_init_window(wlf);
-	return (0);
+	i = 0;
+	str = s;
+	if (n > 0 && s)
+	{
+		while (i < n)
+		{
+			if (str[i] == (unsigned char)c)
+				return ((char *)&str[i]);
+			i++;
+		}
+	}
+	return (NULL);
 }

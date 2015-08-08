@@ -6,28 +6,29 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:46:48 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/07 21:27:37 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/08 15:59:57 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-t_wlf ft_init_window(t_wlf wlf)
+t_wlf	ft_init_window(t_wlf wlf)
 {
+	int lar;
+	int len;
+
+	len = 100;
+	lar = 100;
 	MLX = mlx_init();
 	wlf.win = mlx_new_window(MLX, WIN_X, WIN_Y, "wlf");
 	IMG = mlx_new_image(MLX, WIN_X, WIN_Y);
+	wlf.data = mlx_get_data_addr(IMG, &wlf.bpp, &wlf.sizeline, &wlf.endian);
 	mlx_hook(WIN, 2, (1L << 0), key_hook, &wlf);
-
-/* 	mlx_key_hook(WIN, key_hook, &wlf); */
-/* 	mlx_do_key_autorepeaton(MLX); */
-/* 	mlx_hook(WIN, 3, (1L << 1), key_stop, &wlf); */
 	mlx_expose_hook(WIN, expose_hook, &wlf);
-	//mlx_key_hook(WIN, key_hook, &wlf);
-//	ft_draw_map(&wlf);
-/* 	wlf.text = mlx_xpm_file_to_image(MLX, "textures/wolf3d-2017-nguye_1/carabine.xpm", &lar, &len); */
-	/* usleep(5000); */
+	wlf.text = mlx_xpm_file_to_image(MLX,
+				"assault.xpm", &lar, &len);
+	wlf.textu = mlx_xpm_file_to_image(MLX, "pics/redbrick.xpm", &lar,  &len);
+	wlf.data2 = mlx_get_data_addr(wlf.textu, &wlf.bpp1, &wlf.sizeline1, &wlf.endian1);
 	mlx_loop(wlf.mlx);
-	
 	return (wlf);
 }

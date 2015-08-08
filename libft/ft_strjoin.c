@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/14 14:50:44 by nidzik            #+#    #+#             */
-/*   Updated: 2015/05/17 16:53:12 by nidzik           ###   ########.fr       */
+/*   Created: 2014/11/16 19:48:46 by nidzik            #+#    #+#             */
+/*   Updated: 2014/12/17 12:07:41 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char		*ft_strjoin(const char *s1, const char *s2)
 {
-	t_wlf	wlf;
+	char	*dst;
 
-	(void)ac;
-	(void)av;
-	ft_init_env(&wlf);
-	wlf = ft_init_window(wlf);
-	return (0);
+	if (!s1 || !s2)
+		return ((char *)0);
+	dst = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!dst)
+		return ((char *)0);
+	ft_strcpy(dst, s1);
+	ft_strcat(dst, s2);
+	return (dst);
 }
