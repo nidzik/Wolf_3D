@@ -6,13 +6,13 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 12:45:33 by nidzik            #+#    #+#             */
-/*   Updated: 2014/12/15 11:55:05 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/22 20:13:57 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-char *ft_strncpy(char *dst, const char *src, size_t n)
+char	*ft_strncpy(char *dst, const char *src, size_t n)
 {
 	size_t i;
 

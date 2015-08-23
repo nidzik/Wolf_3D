@@ -6,13 +6,13 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 17:56:55 by nidzik            #+#    #+#             */
-/*   Updated: 2014/11/10 19:29:54 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/22 20:12:00 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isalpha(int c)
+int		ft_isalpha(int c)
 {
 	if (c >= 'A' && c <= 'Z')
 		return (1);

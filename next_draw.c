@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   next_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 18:39:29 by nidzik            #+#    #+#             */
-/*   Updated: 2015/08/22 20:12:26 by nidzik           ###   ########.fr       */
+/*   Created: 2015/08/22 19:30:07 by nidzik            #+#    #+#             */
+/*   Updated: 2015/08/22 20:09:56 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "wolf.h"
 
-int		ft_isdigit(int c)
+void		ft_draw_floor(t_wlf *wlf, t_pos pos)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	wlf->data[pos.y * wlf->sizeline + 4 * pos.i + 0] = pos.color_floor;
+	wlf->data[pos.y * wlf->sizeline + 4 * pos.i + 1] = pos.color_floor >> 8;
+	wlf->data[pos.y * wlf->sizeline + 4 * pos.i + 2] =
+		pos.color_floor >> 16;
 }

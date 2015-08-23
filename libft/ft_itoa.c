@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/16 10:21:05 by nidzik            #+#    #+#             */
-/*   Updated: 2015/03/10 17:13:29 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/22 20:13:02 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_itoa(int n)
 {
 	char	*resstring;
 
-	resstring = ft_strnew (20);
+	resstring = ft_strnew(20);
 	if (n >= 0 && resstring)
 	{
 		*--resstring = '0' + (n % 10);

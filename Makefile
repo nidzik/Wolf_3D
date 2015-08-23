@@ -6,7 +6,7 @@
 #    By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:28:17 by nidzik            #+#    #+#              #
-#    Updated: 2015/08/08 11:46:05 by nidzik           ###   ########.fr        #
+#    Updated: 2015/08/22 19:37:23 by nidzik           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -46,7 +46,8 @@ SRCSFILES = draw.c \
 			main.c \
 			mlx_init.c \
 			more_event.c \
-			textures.c
+			textures.c \
+			next_draw.c
 
 SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
 OBJECTS = $(SRC:$(SRCPATH)/%.c=$(OBJPATH)/%.o)

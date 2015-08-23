@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 15:31:41 by nidzik            #+#    #+#             */
-/*   Updated: 2015/08/08 13:10:32 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/23 16:07:05 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 # include <time.h>
 # include <sys/time.h>
 
-# define WIN	wlf.win
-# define WINP	wlf->win
-# define MLX	wlf.mlx
-# define MLXP	wlf->mlx
-# define TEXT	wlf->text
-# define IMG	wlf.img
-# define IMGP	 wlf->img
-# define texWidth 64
-# define texHeight 64
-# define WIN_X	800
-# define WIN_Y	500
+# define WIN		wlf.win
+# define WINP		wlf->win
+# define MLX		wlf.mlx
+# define MLXP		wlf->mlx
+# define TEXT		wlf->text
+# define IMG		wlf.img
+# define IMGP		wlf->img
+# define TEXWIDTH	64
+# define TEXHEIGHT	64
+# define WIN_X		800
+# define WIN_Y		500
 
 typedef	struct	s_pos
 {
@@ -51,7 +51,27 @@ typedef	struct	s_pos
 	int			lineh;
 	double		hwall;
 	int			color;
+	int			y;
+	int			color_sky;
+	int			color_floor;
+	int			d;
+	int			texy;
 }				t_pos;
+
+typedef struct	s_tex
+{
+	int			bpp;
+	int			sl;
+	int			endian;
+}				t_tex;
+
+typedef struct	s_tex2
+{
+	int			x;
+	int			y;
+	int			i;
+	int			c;
+}				t_tex2;
 
 typedef	struct	s_wlf
 {
@@ -66,7 +86,7 @@ typedef	struct	s_wlf
 	int			endian1;
 	char		*data;
 	char		*data1;
-	char		*data2;
+	char		**data2;
 	void		*text;
 	void		*textu;
 	int			map_dim[2];
@@ -80,8 +100,8 @@ typedef	struct	s_wlf
 	double		hwallvar;
 	double		speedrotate;
 	double		move_speed;
-	int		*texture;
-  int texX;
+	int			**texture;
+	int			texx;
 }				t_wlf;
 
 typedef	struct	s_ray
@@ -136,7 +156,6 @@ t_pos			ft_left(t_pos pos, t_wlf *w);
 t_wlf			*up(t_wlf *w);
 t_wlf			*down(t_wlf *w);
 t_wlf			*ft_draw_sky(t_wlf *wlf, t_pos p);
-void			ft_draw_floor(t_wlf *wlf, t_pos p);
 int				ft_key_hook(int keycode);
 t_wlf			*tp(t_wlf *w);
 int				color(t_wlf *wlf, t_pos pos, t_ray r);
@@ -144,5 +163,10 @@ t_wlf			*creat_map(t_wlf *wlf, int *mapi);
 int				*ft_char_to_int(char *str);
 t_wlf			*create_text(t_wlf *w);
 t_wlf			*create_text2(t_wlf *w, t_ray *r);
+t_pos			ft_draw2(t_wlf *wlf, t_pos pos, t_ray r);
+void			print_map(t_wlf *wlf);
+void			ft_draw_floor(t_wlf *wlf, t_pos pos);
+t_tex2			ft_main_tex(t_tex2 t, t_wlf *w);
+t_wlf			texture_di_ouf(t_wlf wlf, t_tex tex, int len, int lar);
 
 #endif

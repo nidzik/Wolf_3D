@@ -6,13 +6,13 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/05 12:43:31 by nidzik            #+#    #+#             */
-/*   Updated: 2014/11/14 19:00:38 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/22 20:14:08 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_tolower(int c)
+int		ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
 		return (c + 32);

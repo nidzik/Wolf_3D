@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 16:29:16 by nidzik            #+#    #+#             */
-/*   Updated: 2015/08/08 12:17:40 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/23 15:47:14 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int			key_hook(int keycode, t_wlf *wlf)
 		wlf = up(wlf);
 	if (keycode == 125 || keycode == 65364)
 		wlf = down(wlf);
-	if (keycode == 116  || keycode == 'u')
+	if (keycode == 116 || keycode == 'u')
 		wlf->hwallvar += 0.1;
-	if ((keycode == 121  || keycode == 'j' )&& wlf->hwallvar > -0.5)
+	if ((keycode == 121 || keycode == 'j') && wlf->hwallvar > -0.5)
 		wlf->hwallvar -= 0.1;
 	if (keycode == 82)
 		wlf->hwallvar = 0;

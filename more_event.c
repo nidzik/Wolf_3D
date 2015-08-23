@@ -6,7 +6,7 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/17 10:02:07 by nidzik            #+#    #+#             */
-/*   Updated: 2015/06/14 15:01:00 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/23 15:29:55 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_wlf		*tp(t_wlf *w)
 {
 	if (w->p.posx > 8 && w->p.posy < 2)
 	{
-		w->p.posx = 2;
+		w->p.posx = 7;
 		w->p.posy = 13;
 	}
 	return (w);
@@ -55,7 +55,7 @@ int			*ft_char_to_int(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] != '0' && str[i] != '1')
+		if (ft_isdigit(str[i]) == 0)
 			i++;
 		else
 		{
@@ -81,6 +81,5 @@ int			color(t_wlf *wlf, t_pos pos, t_ray r)
 		pos.color = (pos.posy > 6) ? 0x508816 : 0x99ff33;
 	else if (r.side == 1)
 		pos.color = (pos.posy > 6) ? 0x446644 : 0x88cc88;
-	ft_draw_sky(wlf, pos);
 	return (pos.color);
 }

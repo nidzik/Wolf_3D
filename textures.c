@@ -6,56 +6,74 @@
 /*   By: nidzik <nidzik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/08 11:47:38 by nidzik            #+#    #+#             */
-/*   Updated: 2015/08/08 16:01:10 by nidzik           ###   ########.fr       */
+/*   Updated: 2015/08/23 16:07:29 by nidzik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-t_wlf *create_text(t_wlf *w)
+t_tex2		init_text(t_tex2 t)
 {
-
-  int x;
-  int y;
-
-  x = 0;
-  y = 0;
-  w->texture = malloc(sizeof(int) * (64 * 64) + 1);
-  while (x <= texWidth)
-    {
-      y = 0;
-      while (y <= texHeight)
-	{
-/* 	  int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight); */
-	  //	  int xycolor = y * 128 / texHeight + x * 128 / texWidth + 500 ;
-
-		int c = 0;
-			c += w->data2[(w->sizeline1 * y + x*4)] ; 
-		c += w->data2[(w->sizeline1 * y + x *4) +1] << 8 ; 
-		c += w->data2[(w->sizeline1 * y + x *4)+2] << 16; 
-		w->texture[texWidth * y + x] = c;//w->data2[texWidth * y + x]; 
-//256 * xorcolor;
-//xycolor + 256 * xycolor + 65536 * xycolor;
-	  y++;
-/* 	  printf("%d\n",w->texture[texWidth * y + x]);fflush(stdout); */
-	}
-      x++;
-    }
-return (w);
+	t.x = 0;
+	t.i = 0;
+	t.y = 0;
+	return (t);
 }
-t_wlf *create_text2(t_wlf *w, t_ray *r)
-{
-  //  int texnum = w->map[r->mapx][r->mapy];
-  double wallX; //where exactly the wall was hit
-  if (r->side == 1)
-	  wallX = r->rayposx + ((r->mapy - r->rayposy + (1 - r->stepy) / 2) / r->raydiry) * r->raydirx;
-  else
-	  wallX = r->rayposy + ((r->mapx - r->rayposx + (1 - r->stepx) / 2) / r->raydirx) * r->raydiry;
-  wallX -= floor((wallX));
 
-  //x coordinate on the texture
-  w->texX =  (wallX * (texWidth));
-  if(r->side == 0 && r->raydirx > 0) w->texX = texWidth - w->texX - 1;
-  if(r->side == 1 && r->raydiry < 0) w->texX = texWidth - w->texX - 1;
-return (w);
+t_wlf		*create_text(t_wlf *w)
+{
+	t_tex2 t;
+
+	t = init_text(t);
+	w->texture = (int **)malloc(sizeof(int*) * 7);
+	while (t.i != 7)
+	{
+		w->texture[t.i] = (int *)malloc(sizeof(int) * ((64 * 64) + 1));
+		t.i++;
+	}
+	w->texture[6] = NULL;
+	t.i = 0;
+	while (t.i < 6)
+	{
+		while (t.x <= TEXWIDTH)
+		{
+			t.y = 0;
+			while (t.y <= TEXHEIGHT)
+				t = ft_main_tex(t, w);
+			t.x++;
+		}
+		t.x = 0;
+		t.i++;
+	}
+	return (w);
+}
+
+t_tex2		ft_main_tex(t_tex2 t, t_wlf *w)
+{
+	t.c = 0;
+	t.c += w->data2[t.i][(w->sizeline1 * t.y + t.x * 4)];
+	t.c += w->data2[t.i][(w->sizeline1 * t.y + t.x * 4) + 1] << 8;
+	t.c += w->data2[t.i][(w->sizeline1 * t.y + t.x * 4) + 2] << 16;
+	w->texture[t.i][TEXWIDTH * t.y + t.x] = t.c;
+	t.y++;
+	return (t);
+}
+
+t_wlf		*create_text2(t_wlf *w, t_ray *r)
+{
+	double	wallx;
+
+	if (r->side == 1)
+		wallx = r->rayposx + ((r->mapy - r->rayposy + (1 - r->stepy) /
+							2) / r->raydiry) * r->raydirx;
+	else
+		wallx = r->rayposy + ((r->mapx - r->rayposx + (1 - r->stepx) /
+							2) / r->raydirx) * r->raydiry;
+	wallx -= floor(wallx);
+	w->texx = (wallx * (TEXWIDTH));
+	if (r->side == 0 && r->raydirx > 0)
+		w->texx = TEXWIDTH - w->texx - 1;
+	if (r->side == 1 && r->raydiry < 0)
+		w->texx = TEXWIDTH - w->texx - 1;
+	return (w);
 }
